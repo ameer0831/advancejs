@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nested Objects Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .profile {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nested Objects in JavaScript Example</h1>
+
+  <div class="profile">
+    <h2>User Profile</h2>
+    <div id="profileDetails"></div>
+  </div>
+
+  <div>
+    <button onclick="modifyAddress()">Change Address</button>
+    <button onclick="updateTheme()">Change Theme</button>
+  </div>
+
+  <script>
+    // Defining a nested object for the user
+    const user = {
+      name: 'John Doe',
+      age: 30,
+      address: {
+        street: '123 Main St',
+        city: 'New York',
+        postalCode: '10001',
+        country: 'USA'
+      },
+      preferences: {
+        theme: 'dark',
+        notifications: true
+      }
+    };
+
+    // Function to display the user profile details
+    function displayProfile() {
+      const profileElement = document.getElementById('profileDetails');
+      profileElement.innerHTML = `
+        <p><strong>Name:</strong> ${user.name}</p>
+        <p><strong>Age:</strong> ${user.age}</p>
+        <p><strong>Address:</strong> ${user.address.street}, ${user.address.city}, ${user.address.country} - ${user.address.postalCode}</p>
+        <p><strong>Theme:</strong> ${user.preferences.theme}</p>
+        <p><strong>Notifications:</strong> ${user.preferences.notifications ? 'Enabled' : 'Disabled'}</p>
+      `;
+    }
+
+    // Function to modify the user's address
+    function modifyAddress() {
+      // Modify the address within the nested object
+      user.address.city = 'San Francisco';
+      user.address.street = '456 New St';
+      
+      // Re-render the profile with the updated information
+      displayProfile();
+    }
+
+    // Function to update the user's theme preference
+    function updateTheme() {
+      user.preferences.theme = (user.preferences.theme === 'dark') ? 'light' : 'dark';
+      
+      // Re-render the profile with the updated theme
+      displayProfile();
+    }
+
+    // Initially display the user profile when the page loads
+    displayProfile();
+  </script>
+
+</body>
+</html>

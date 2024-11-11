@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Literals Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .profile {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 10px;
+      max-width: 300px;
+    }
+    .profile img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dynamic Profile with Template Literals</h1>
+  
+  <!-- Profile will be inserted here -->
+  <div id="profileContainer"></div>
+
+  <script>
+    // JavaScript object holding user profile data
+    const user = {
+      name: 'Alice Johnson',
+      age: 28,
+      city: 'San Francisco',
+      profilePicture: 'https://via.placeholder.com/150',
+      hobbies: ['Reading', 'Traveling', 'Photography']
+    };
+
+    // Function to render the user's profile using template literals
+    function renderProfile() {
+      const profileContainer = document.getElementById('profileContainer');
+
+      // Using template literals to create a string with dynamic content
+      const profileHTML = `
+        <div class="profile">
+          <img src="${user.profilePicture}" alt="Profile Picture">
+          <h2>${user.name}</h2>
+          <p><strong>Age:</strong> ${user.age}</p>
+          <p><strong>City:</strong> ${user.city}</p>
+          <h3>Hobbies:</h3>
+          <ul>
+            ${user.hobbies.map(hobby => `<li>${hobby}</li>`).join('')}
+          </ul>
+        </div>
+  

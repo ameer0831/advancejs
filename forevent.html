@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Events Example</title>
+</head>
+<body>
+  <button class="btn">Hover or Click Me</button>
+  <button class="btn">Hover or Click Me Too</button>
+
+  <script>
+    // Select all buttons
+    const buttons = document.querySelectorAll('.btn');
+
+    // Loop through the buttons and attach multiple event listeners
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener('click', function () {
+        alert(`Button ${i + 1} clicked!`);
+      });
+
+      buttons[i].addEventListener('mouseenter', function () {
+        console.log(`Mouse entered Button ${i + 1}`);
+      });
+
+      buttons[i].addEventListener('mouseleave', function () {
+        console.log(`Mouse left Button ${i + 1}`);
+      });
+    }
+  </script>
+</body>
+</html>

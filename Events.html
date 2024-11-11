@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>let lastTime = 0;
+        const throttle = (func, limit) => {
+          return function () {
+            const now = new Date().getTime();
+            if (now - lastTime >= limit) {
+              func();
+              lastTime = now;
+            }
+          };
+        };
+        
+        window.addEventListener('scroll', throttle(() => {
+          console.log('Scroll event triggered');
+        }, 200));</script>
+</body>
+</html>
