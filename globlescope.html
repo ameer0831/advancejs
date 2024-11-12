@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Scope Example</title>
+</head>
+<body>
+    <h1>Global Scope Example</h1>
+
+    <script>
+        // Global variable
+        let globalVar = "I am a global variable";
+
+        // Global function
+        function globalFunction() {
+            console.log("I am a global function");
+        }
+
+        // Accessing global variable and function inside another function
+        function accessGlobal() {
+            console.log(globalVar);  // Accessible here
+            globalFunction();        // Accessible here
+        }
+
+        // Calling the function that accesses global variables
+        accessGlobal();
+
+        // Accessing global variable directly in the global scope
+        console.log(globalVar);  // Accessible here as well
+    </script>
+</body>
+</html>

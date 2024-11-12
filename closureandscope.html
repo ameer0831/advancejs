@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures and Scopes in JavaScript</title>
+</head>
+<body>
+    <h1>Closures and Scopes in JavaScript</h1>
+
+    <script>
+        // Global Scope
+        let globalVar = "I am a global variable";
+
+        // Function Scope
+        function outerFunction() {
+            // Outer function variable
+            let outerVar = "I am from the outer function";
+            
+            // Closure function
+            function innerFunction() {
+                // Inner function has access to outer function's variables
+                console.log(outerVar); // This is a closure, accessing 'outerVar'
+                console.log(globalVar); // This is also accessible as it's in the global scope
+            }
+            
+            return innerFunction; // Return the closure function
+        }
+
+        // Create a closure by calling outerFunction
+        const closureFunction = outerFunction();
+
+        // Call the closure function, which still has access to the outer function's scope
+        closureFunction(); // Output: "I am from the outer function", "I am a global variable"
+        
+        // Block Scope Example with let and const
+        {
+            let blockScopedVar = "I'm block-scoped!";
+            const blockScopedConst = "I am also block-scoped!";
+            console.log(blockScopedVar);  // Accessible
+            console.log(blockScopedConst); // Accessible
+        }
+
+        // This will throw an error because the variables are block-scoped
+        // console.log(blockScopedVar); // Uncaught ReferenceError
+        // console.log(blockScopedConst); // Uncaught ReferenceError
+    </script>
+</body>
+</html>

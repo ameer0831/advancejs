@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexical Scoping Example</title>
+</head>
+<body>
+    <h1>Lexical Scoping in JavaScript</h1>
+
+    <script>
+        // Outer function (has its own scope)
+        function outerFunction() {
+            let outerVar = "I am from the outer function";
+
+            // Inner function (closure) defined inside the outer function
+            function innerFunction() {
+                console.log(outerVar); // The inner function can access `outerVar` because of lexical scoping
+            }
+
+            innerFunction(); // Call the inner function
+        }
+
+        // Call the outer function
+        outerFunction();
+
+        // The following will throw an error because `outerVar` is not in the global scope
+        // console.log(outerVar); // Uncaught ReferenceError: outerVar is not defined
+    </script>
+</body>
+</html>

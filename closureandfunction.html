@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Scope Example</title>
+</head>
+<body>
+    <h1>Function Scope Example</h1>
+
+    <script>
+        function myFunction() {
+            let localVar = "I am a local variable inside myFunction!";
+            console.log(localVar); // This will work, because localVar is inside the function
+        }
+
+        myFunction();
+
+        // The following line will throw an error because `localVar` is not accessible outside the function
+        // console.log(localVar); // Uncaught ReferenceError: localVar is not defined
+    </script>
+</body>
+</html>
