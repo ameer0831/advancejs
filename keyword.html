@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>'this' Keyword Context</title>
+    <style>
+        /* Basic CSS for the button */
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Understanding the 'this' Keyword in JavaScript</h1>
+
+    <button id="button">Click Me</button>
+    <div id="output"></div>
+
+    <script>
+        // Example 1: 'this' in the Global Context
+        console.log("Global context 'this':", this);  // In a browser, this refers to the 'window' object
+
+        // Example 2: 'this' in Regular Function (Global Context)
+        function globalFunction() {
+            console.log("Inside globalFunction 'this':", this);  // 'this' refers to 'window' object in browsers
+        }
+        globalFunction();
+
+        // Example 3: 'this' inside an Object Method
+        const car = {
+            brand: 'Tesla',
+            model: 'Model S',
+            info: function() {
+                console.log("Inside car.info method 'this':", this);  // 'this' refers to the car object
+                console.log(`This car is a ${this.brand} ${this.model}`);
+            }
+        };
+        car.info();
+
+        // Example 4: 'this' inside an Arrow Function (No Binding)
+        const obj = {
+            name: 'Alice',
+            greet: () => {
+                console.log("Inside arrow function 'this':", this);  // 'this' refers to the global object (window)
+                console.log(`Arrow function cannot access obj.name: ${this.name}`);  // Undefined
+            }
+        };
+        obj.greet();
+
+        // Example 5: 'this' in Event Listener
+        document.getElementById("button").addEventListener('click', function() {
+            console.log("Inside event listener 'this':", this);  // 'this' refers to the button element
+            document.getElementById("output").innerText = `Button clicked! This is the button: ${this}`;
+        });
+
+        // Example 6: 'this' in Constructor Function (or ES6 Class)
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            greet() {
+                console.log("Inside class method 'this':", this);  // 'this' refers to the instance of Person
+                console.log(`Hello, my name is ${this.name}`);
+            }
+        }
+
+        const person1 = new Person('John', 30);
+        person1.greet();
+
+        // Example 7: 'this' in setTimeout (Global Context)
+        setTimeout(function() {
+            console.log("Inside setTimeout function 'this':", this);  // 'this' refers to the global object (window)
+        }, 1000);
+
+        // Example 8: Explicit Binding with .bind()
+        const user = {
+            name: 'Bob',
+            greet: function() {
+                console.log("Inside greet with .bind() 'this':", this);
+                console.log(`Hello, my name is ${this.name}`);
+            }
+        };
+
+        const boundGreet = user.greet.bind({ name: 'Charlie' });
+        boundGreet();  // 'this' refers to the new object passed to .bind()
+
+        // Example 9: Arrow Function with setTimeout (Lexical 'this')
+        const person2 = {
+            name: 'Eve',
+            delayedGreeting: function() {
+                setTimeout(() => {
+                    console.log("Inside setTimeout with arrow function 'this':", this);  // 'this' refers to person2
+                    console.log(`Hello from ${this.name}`);
+                }, 1000);
+            }
+        };
+        person2.delayedGreeting();
+
+    </script>
+</body>
+</html>

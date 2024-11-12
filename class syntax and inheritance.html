@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Classes and Inheritance</title>
+    <style>
+        /* Basic CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ecf0f1;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Understanding Classes and Inheritance in JavaScript</h1>
+    
+    <button id="displayInfo">Display Information</button>
+    <div id="output" class="output"></div>
+
+    <script>
+        // Base class: Vehicle
+        class Vehicle {
+            constructor(make, model, year) {
+                this.make = make;
+                this.model = model;
+                this.year = year;
+            }
+
+            // Method for the Vehicle class
+            displayInfo() {
+                return `${this.year} ${this.make} ${this.model}`;
+            }
+        }
+
+        // Derived class: Car that inherits from Vehicle
+        class Car extends Vehicle {
+            constructor(make, model, year, doors) {
+                // Call the parent constructor (Vehicle)
+                super(make, model, year);
+                this.doors = doors;
+            }
+
+            // Overriding displayInfo method to include doors
+            displayInfo() {
+                return `${super.displayInfo()} with ${this.doors} doors`;
+            }
+
+            // Method unique to Car
+            honk() {
+                return "Beep beep!";
+            }
+        }
+
+        // Derived class: ElectricCar that inherits from Car
+        class ElectricCar extends Car {
+            constructor(make, model, year, doors, batteryLife) {
+                // Call the parent constructor (Car)
+                super(make, model, year, doors);
+                this.batteryLife = batteryLife;
+            }
+
+            // Overriding displayInfo to include battery life
+            displayInfo() {
+                return `${super.displayInfo()} and battery life of ${this.batteryLife} hours`;
+            }
+
+            // Method unique to ElectricCar
+            charge() {
+                return "Charging the electric car...";
+            }
+        }
+
+        // Create an instance of ElectricCar
+        const myTesla = new ElectricCar("Tesla", "Model 3", 2021, 4, 24);
+
+        // Display the information about the ElectricCar
+        document.getElementById("displayInfo").addEventListener("click", function() {
+            const output = document.getElementById("output");
+            output.innerHTML = `
+                <p>Car Info: ${myTesla.displayInfo()}</p>
+                <p>${myTesla.honk()}</p>
+                <p>${myTesla.charge()}</p>
+            `;
+        });
+
+    </script>
+
+</body>
+</html>

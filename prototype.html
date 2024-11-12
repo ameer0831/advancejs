@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype and Inheritance Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ecf0f1;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Understanding Prototypes and Inheritance in JavaScript</h1>
+    
+    <button id="showInfo">Show Info</button>
+    <div id="output" class="output"></div>
+
+    <script>
+        // Base Constructor function (Person)
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Adding a method to the Person prototype
+        Person.prototype.greet = function() {
+            return `Hello, my name is ${this.name} and I am ${this.age} years old.`;
+        };
+
+        // Inheritance: Create a new object (Employee) that inherits from Person
+        function Employee(name, age, jobTitle) {
+            Person.call(this, name, age); // Call the parent constructor to initialize name and age
+            this.jobTitle = jobTitle;
+        }
+
+        // Set Employee's prototype to be an instance of Person
+        Employee.prototype = Object.create(Person.prototype);
+
+        // Correct the constructor pointer for Employee instances
+        Employee.prototype.constructor = Employee;
+
+        // Add a method to the Employee prototype
+        Employee.prototype.describeJob = function() {
+            return `${this.name} is a(n) ${this.jobTitle}.`;
+        };
+
+        // Create an instance of Employee
+        const employee1 = new Employee("Alice", 30, "Software Developer");
+
+        // Button click event to display information
+        document.getElementById("showInfo").addEventListener("click", function() {
+            const output = document.getElementById("output");
+            output.innerHTML = `
+                <p>${employee1.greet()}</p>  <!-- Greet from Person prototype -->
+                <p>${employee1.describeJob()}</p>  <!-- Job description from Employee prototype -->
+            `;
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototypes and Prototype Chain in JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #1b1515;
+        }
+    </style>
+</head>
+<body>
+    <h1>Understanding Prototypes and Prototype Chain in JavaScript</h1>
+
+    <div id="output" class="output"></div>
+
+    <script>
+        // Constructor function for Person
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Adding a method to the prototype of Person
+        Person.prototype.sayHello = function() {
+            console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+        };
+
+        // Creating an instance of Person
+        const person1 = new Person('John', 30);
+        person1.sayHello();  // This method is available through the prototype
+
+        // Checking the prototype chain
+        console.log(person1.__proto__);  // Points to Person.prototype
+
+        // Person.prototype is the prototype of all instances created from Person
+
+        // Creating another object that inherits from Person's prototype
+        const person2 = new Person('Alice', 25);
+        person2.sayHello();  // Inherited from Person.prototype
+
+        // Checking the prototype chain for person2
+        console.log(person2.__proto__ === Person.prototype);  // true
+        console.log(person2.__proto__.__proto__);  // Points to Object.prototype (the end of the prototype chain)
+
+        // Example of Object.prototype (the end of the prototype chain)
+        console.log(person1.__proto__.__proto__);  // This refers to Object.prototype, where built-in methods like toString() are defined
+
+        // Add a custom method to Object.prototype
+        Object.prototype.sayGoodbye = function() {
+            console.log(`Goodbye from ${this.name}`);
+        };
+
+        // Call the new method on person1
+        person1.sayGoodbye();  // This is available via the prototype chain
+
+        // Showing the full prototype chain for person1
+        console.log(Object.getPrototypeOf(person1));  // Person.prototype
+        console.log(Object.getPrototypeOf(Object.getPrototypeOf(person1)));  // Object.prototype
+    </script>
+</body>
+</html>
