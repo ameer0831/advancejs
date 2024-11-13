@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spread and Rest Operators Example</title>
+  <style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  #app {
+    text-align: center;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #333;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Spread & Rest Operators in JavaScript</h1>
+    <p id="result"></p>
+    <button onclick="useSpreadOperator()">Use Spread Operator</button>
+    <button onclick="useRestOperator()">Use Rest Operator</button>
+  </div>
+
+  <script>// Spread operator example
+    function useSpreadOperator() {
+      // Example of using the spread operator with arrays
+      const arr1 = [1, 2, 3];
+      const arr2 = [...arr1, 4, 5, 6];  // Spread arr1 and add new elements
+      
+      // Example of using the spread operator with objects
+      const obj1 = { name: 'John', age: 25 };
+      const obj2 = { ...obj1, country: 'USA' }; // Spread obj1 and add new properties
+    
+      // Update the displayed result in HTML
+      const result = `
+        <strong>Spread Operator:</strong><br>
+        Array before spread: [${arr1}]<br>
+        Array after spread: [${arr2}]<br><br>
+        Object before spread: { name: 'John', age: 25 }<br>
+        Object after spread: { name: 'John', age: 25, country: 'USA' }
+      `;
+      document.getElementById('result').innerHTML = result;
+    }
+    
+    // Rest operator example
+    function useRestOperator() {
+      // Example of using the rest operator with arrays
+      const arr = [1, 2, 3, 4, 5];
+      const [first, second, ...rest] = arr; // rest operator collects the remaining items
+    
+      // Example of using the rest operator with function parameters
+      function sum(...numbers) {
+        return numbers.reduce((acc, num) => acc + num, 0);
+      }
+      const total = sum(1, 2, 3, 4, 5); // sum using the rest operator
+    
+      // Update the displayed result in HTML
+      const result = `
+        <strong>Rest Operator:</strong><br>
+        Array before rest: [${arr}]<br>
+        First: ${first}, Second: ${second}, Rest: [${rest}]<br><br>
+        Sum using rest operator: ${total}
+      `;
+      document.getElementById('result').innerHTML = result;
+    }
+    </script>
+</body>
+</html>

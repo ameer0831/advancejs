@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destructuring Assignment Example</title>
+  <style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  #app {
+    text-align: center;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Destructuring Assignment Example</h1>
+    <p id="name"></p>
+    <p id="colors"></p>
+    <button onclick="updateValues()">Update Values</button>
+  </div>
+
+  <script>// Example 1: Destructuring an array
+    const numbers = [10, 20, 30, 40, 50];
+    
+    // Destructuring assignment
+    const [first, second, third] = numbers;
+    
+    console.log(first, second, third);  // 10 20 30
+    
+    // Example 2: Destructuring an object
+    const person = {
+      name: 'John Doe',
+      age: 30,
+      country: 'USA'
+    };
+    
+    // Destructuring assignment
+    const { name, age, country } = person;
+    
+    console.log(name, age, country);  // John Doe 30 USA
+    
+    // Example 3: Nested destructuring (array inside an object)
+    const user = {
+      name: 'Alice',
+      address: {
+        city: 'New York',
+        zip: '10001'
+      },
+      hobbies: ['Reading', 'Cycling', 'Cooking']
+    };
+    
+    // Destructuring with nested properties
+    const {
+      name: userName,
+      address: { city },
+      hobbies: [firstHobby, secondHobby]
+    } = user;
+    
+    console.log(userName, city, firstHobby, secondHobby);  // Alice New York Reading Cycling
+    
+    // Update the displayed values in HTML
+    function updateValues() {
+      const userInfo = {
+        name: 'SK AMEER',
+        age: 22,
+        country: 'USA'
+      };
+    
+      // Destructure to extract values
+      const { name, age, country } = userInfo;
+      document.getElementById('name').textContent = `Name: ${name}, Age: ${age}, Country: ${country}`;
+    
+      const colorArray = ['Red', 'Blue', 'Green'];
+      const [color1, color2, color3] = colorArray;
+      document.getElementById('colors').textContent = `Colors: ${color1}, ${color2}, ${color3}`;
+    }
+    </script>
+</body>
+</html>

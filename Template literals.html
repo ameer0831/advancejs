@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Literals Example</title>
+  <style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  #app {
+    text-align: center;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #333;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Template Literals in JavaScript</h1>
+    <p id="result"></p>
+    <button onclick="displayInfo()">Show Info</button>
+  </div>
+
+  <script>function displayInfo() {
+    // Variables to be embedded in the template literal
+    const name = "Ameer";
+    const age = 22;
+    const country = "INDIA";
+  
+    // Example of a template literal with embedded expressions
+    const message = `
+      <strong>Template Literal Example:</strong><br>
+      Name: ${name}<br>
+      Age: ${age}<br>
+      Country: ${country}<br>
+      <br>
+      Multi-line strings are easy with template literals!
+    `;
+  
+    // Display the message in the HTML
+    document.getElementById('result').innerHTML = message;
+  }
+  </script>
+</body>
+</html>
