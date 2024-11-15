@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Error Handling in JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Error Handling with JavaScript</h1>
+    <button onclick="handleCustomError()">Simulate Custom Error</button>
+    
+    <div id="result"></div>
+
+    <script>
+        // Custom Error Class
+        class CustomError extends Error {
+            constructor(message, type) {
+                super(message); // Pass the message to the Error constructor
+                this.name = "CustomError"; // Name of the error type
+                this.type = type || "General"; // Type of the custom error
+                this.timestamp = new Date(); // Add a timestamp for when the error occurred
+            }
+        }
+
+        function handleCustomError() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = ''; // Clear previous results
+            resultDiv.className = ''; // Clear any previous styles
+            
+            try {
+                // Simulate a scenario where an error is thrown
+                let userInput = document.getElementById('userInput')?.value;
+
+                // Check if user input is empty, and throw custom error if so
+                if (!userInput || userInput.trim() === "") {
+                    throw new CustomError("Input cannot be empty!", "ValidationError");
+                }
+
+                // Simulate successful operation
+                resultDiv.textContent = `User input: ${userInput}`;
+                resultDiv.className = 'success';
+
+            } catch (error) {
+                // Catch any errors (including custom errors)
+                if (error instanceof CustomError) {
+                    resultDiv.textContent = `Custom Error: ${error.message} (Type: ${error.type})`;
+                    resultDiv.className = 'error';
+                } else {
+                    resultDiv.textContent = `Unexpected Error: ${error.message}`;
+                    resultDiv.className = 'error';
+                }
+            } finally {
+                // Finally block to always run after try-catch
+                console.log("Error handling attempt completed.");
+                resultDiv.innerHTML += "<br><br><strong>Finally Block Executed</strong>";
+                resultDiv.classList.add('info');
+            }
+        }
+    </script>
+</body>
+</html>

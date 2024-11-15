@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Error Handling Example</h1>
+    <button onclick="handleClick()">Try to Divide</button>
+
+    <div id="result"></div>
+
+    <script>
+        function handleClick() {
+            let resultDiv = document.getElementById('result');
+            resultDiv.textContent = ''; // Clear previous results
+
+            try {
+                // Simulate a division by zero error
+                let numerator = 10;
+                let denominator = 0;
+                let result = numerator / denominator;
+
+                // This part will not be reached if an error occurs above
+                if (denominator === 0) {
+                    throw new Error("Cannot divide by zero!");
+                }
+
+                resultDiv.textContent = "Result: " + result;
+            } catch (error) {
+                // Catch any errors that occur in the try block
+                resultDiv.innerHTML = "<span class='error'>Error: " + error.message + "</span>";
+            } finally {
+                // This block will always run
+                console.log("Error handling completed.");
+            }
+        }
+    </script>
+</body>
+</html>

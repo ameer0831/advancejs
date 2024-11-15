@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Data Example</title>
+  <style>/* styles.css */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    form {
+      margin-bottom: 20px;
+    }
+    
+    label, input {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #storedData {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    #storedName, #storedEmail {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Store Your Information</h1>
+    <form id="infoForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      
+      <button type="submit" id="submitBtn">Save Info</button>
+    </form>
+    
+    <div id="storedData">
+      <h2>Stored Information:</h2>
+      <p id="storedName">Name: Not saved yet.</p>
+      <p id="storedEmail">Email: Not saved yet.</p>
+    </div>
+  </div>
+
+  <script>// script.js
+
+    // Function to store data to localStorage
+    function storeData(event) {
+      event.preventDefault();  // Prevent form from submitting and refreshing the page
+    
+      // Get the values from the form
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+    
+      if (name && email) {
+        // Save data to localStorage
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+    
+        // Display the stored data
+        displayStoredData(name, email);
+      } else {
+        alert("Please fill out both fields.");
+      }
+    }
+    
+    // Function to display the stored data
+    function displayStoredData(name, email) {
+      // Update the page with the saved data
+      document.getElementById('storedName').textContent = `Name: ${name}`;
+      document.getElementById('storedEmail').textContent = `Email: ${email}`;
+    }
+    
+    // Load the stored data on page load
+    window.onload = function () {
+      const storedName = localStorage.getItem('userName');
+      const storedEmail = localStorage.getItem('userEmail');
+    
+      // If data exists in localStorage, display it
+      if (storedName && storedEmail) {
+        displayStoredData(storedName, storedEmail);
+      }
+    };
+    
+    // Add event listener to the form submit button
+    document.getElementById('infoForm').addEventListener('submit', storeData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling with Finally</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Try...Catch...Finally Example</h1>
+    <button onclick="handleError()">Simulate Error</button>
+    
+    <div id="result"></div>
+
+    <script>
+        function handleError() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = ''; // Clear previous results
+            resultDiv.className = ''; // Clear any previous styles
+            
+            try {
+                // Simulate a potential error
+                let numerator = 10;
+                let denominator = 0; // We will cause division by zero error
+                
+                if (denominator === 0) {
+                    throw new Error("Cannot divide by zero!"); // Manually throw error
+                }
+                
+                let result = numerator / denominator; // This line won't execute because of the error
+                resultDiv.textContent = `Result: ${result}`;
+                resultDiv.className = 'success';
+
+            } catch (error) {
+                // Handle any errors that occur in the try block
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'error';
+
+            } finally {
+                // This block runs no matter what
+                resultDiv.innerHTML += "<br><br><strong>Finally Block Executed</strong>";
+                resultDiv.classList.add('info'); // Add info style for 'finally' execution
+
+                // Log to the console to show the finalization of the process
+                console.log('Error handling completed, the finally block executed.');
+            }
+        }
+    </script>
+</body>
+</html>
